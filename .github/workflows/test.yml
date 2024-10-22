@@ -1,0 +1,28 @@
+name: Angular Unit Tests
+
+on:
+  push:
+    branches:
+      - main # Führe die Tests bei jedem Push auf den main Branch aus
+  pull_request: # Führe die Tests bei Pull-Requests aus
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # Klone das Repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # Setze die Node.js Version (aktualisiere nach Bedarf)
+
+      - name: Install dependencies
+        run: npm install # Installiere die Abhängigkeiten
+
+      - name: Run tests
+        run: npm test -- --watch=false --bail # Führe die Tests aus
